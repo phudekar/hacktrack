@@ -2,32 +2,22 @@ div(ng-include='"components/navbar/navbar.html"')
 
 header#banner.hero-unit
   .container
-    h1 'HackaThon@EE 2014!
+    h1 HackaThon @ EE 2014!
     p.lead Lets hack internet of things
-    img(src='assets/images/yeoman.png', alt='I\'m Yeoman')
+    div#light
 
-//- .container
-//-   .row
-//-     .col-lg-12
-//-       h1.page-header Features:
-//-       ul.nav.nav-tabs.nav-stacked.col-md-4.col-lg-4.col-sm-6(ng-repeat='thing in awesomeThings')
-//-         li
-//-           a(href='#', tooltip='{{thing.info}}')
-//-             | {{thing.name}}
-//-             button.close(type='button', ng-click='deleteThing(thing)') ×
+.container
+  .row.text-center
+    .col-sm-12
+      div.container-div
+        a.btn.btn-lg.btn-danger(href="/submit-idea") Submit or Join an idea
 
-  //- form.thing-form
-  //-   label Syncs in realtime across clients
-  //-   p.input-group
-  //-     input.form-control(type='text', placeholder='Add a new thing here.', ng-model='newThing')
-  //-     span.input-group-btn
-  //-       button.btn.btn-primary(type='submit', ng-click='addThing()') Add New
 
 footer.footer
   .container
     p
       | HackTrack 2014
       = ' | '
-      a(href='https://twitter.com/hacktrack') @hacktrack
+      a(href='https://twitter.com/hacktrack_') @hacktrack_
       = ' | '
       a(href='https://github.com/DaftMonk/generator-angular-fullstack/issues?state=open') Issues

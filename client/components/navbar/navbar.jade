@@ -17,11 +17,13 @@ div.navbar.navbar-default.navbar-static-top(ng-controller='NavbarCtrl')
           a(href='/admin') Admin
 
       ul.nav.navbar-nav.navbar-right
-        li(ng-hide='isLoggedIn()', ng-class='{active: isActive("/signup")}')
-          a(href='/signup') Sign up
+        //- li(ng-hide='isLoggedIn()', ng-class='{active: isActive("/signup")}')
+        //-   a(href='/signup') Sign up
 
         li(ng-hide='isLoggedIn()', ng-class='{active: isActive("/login")}')
-          a(href='/login') Login
+          a.btn.btn-google-plus(href='/auth/google')
+            i.fa.fa-google-plus
+            |  Login with Google+
 
         li(ng-show='isLoggedIn()')
           p.navbar-text Hello {{ getCurrentUser().name }}
