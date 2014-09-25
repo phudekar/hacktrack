@@ -14,9 +14,9 @@ div(ng-include='"components/navbar/navbar.html"')
       form.form(name='form', ng-submit='submitIdea(form)', novalidate='')
         div.col-sm-12.form-container
             div.col-sm-11
-              input.idea-title.form-control(type='text', name='title', ng-model='idea.title', placeholder='Whats on your mind?' required)
+              input.idea-title.form-control(type='text', name='title', ng-model='newIdea.title', placeholder='Whats on your mind?' required)
               hr.seperator
-              input.idea-description.form-control(type='text', name='description', ng-model='idea.description', placeholder='Would you like to describe it?' required)
+              input.idea-description.form-control(type='text', name='description', ng-model='newIdea.description', placeholder='Would you like to describe it?' required)
             
             div.col-sm-1
               button.btn.btn-inverse.btn-lg.btn-submit(type='submit' tooltip="create new")
