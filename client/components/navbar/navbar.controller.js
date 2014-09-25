@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('hacktrackApp')
-  .controller('NavbarCtrl', function ($scope, $location, Auth) {
+  .controller('NavbarCtrl', function ($scope, $location, Auth, $window) {
     $scope.menu = [{
       'title': 'Home',
       'link': '/'
@@ -14,10 +14,14 @@ angular.module('hacktrackApp')
 
     $scope.logout = function() {
       Auth.logout();
-      $location.path('/login');
+      $location.path('/');
     };
 
     $scope.isActive = function(route) {
       return route === $location.path();
+    };
+
+    $scope.loginOauth = function(provider) {
+      $window.location.href = '/auth/' + provider;
     };
   });

@@ -42,8 +42,8 @@ var all = {
   },
 
   google: {
-    clientID:     process.env.GOOGLE_ID || 'id',
-    clientSecret: process.env.GOOGLE_SECRET || 'secret',
+    clientID:     process.env.GOOGLE_ID, //|| '73642164348-k42epk427v5fhh1sipn0g2kogj69lrns.apps.googleusercontent.com',
+    clientSecret: process.env.GOOGLE_SECRET, //|| '5EZI7HvA4gVDHXpRFr7duVe1',
     callbackURL:  (process.env.DOMAIN || '') + '/auth/google/callback'
   }
 };
