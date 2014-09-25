@@ -1,34 +1,32 @@
 div(ng-include='"components/navbar/navbar.html"')
 .container
   .row
-    .col-sm-5
-      h2.text-center Submit an Idea
-
-      form.form(name='form', ng-submit='submitIdea(form)', novalidate='')
-        .form-group
-          label Title
-          input.form-control(type='text', name='title', ng-model='idea.title' required)
-        .form-group
-          label Description
-          textarea.form-control(name='description', ng-model='idea.description' required)
-
-        .form-group.has-error
+    div.text-center
+      img.bulb.inline(src='/assets/images/bulb.png')
+      h3 Join existing idea or create new
+    div.col-sm-12
+      .has-error
           p.help-block(ng-show='form.title.$error.required && submitted')
             | Please enter the title of your idea.
           p.help-block(ng-show='form.description.$error.required && submitted')
             | Please enter the description of your idea.
           p.help-block {{ errors.other }}
+      form.form(name='form', ng-submit='submitIdea(form)', novalidate='')
+        div.col-sm-12.form-container
+            div.col-sm-11
+              input.idea-title.form-control(type='text', name='title', ng-model='idea.title', placeholder='Whats on your mind?' required)
+              hr.seperator
+              input.idea-description.form-control(type='text', name='description', ng-model='idea.description', placeholder='Would you like to describe it?' required)
+            
+            div.col-sm-1
+              button.btn.btn-inverse.btn-lg.btn-submit(type='submit' tooltip="create new")
 
-        div
-          button.btn.btn-inverse.btn-lg.btn-login(type='submit')
-            | Submit
-
-    .col-sm-7
-      h2.text-center Join existing Idea
-
-      .container
-        ul.nav
-          li(ng-repeat="idea in ideas")
-            div.idea-container
+      ul.nav
+        li(ng-repeat="idea in ideas")
+          div.col-sm-12.idea-container.clear-both
+            .col-sm-11
               h4 {{idea.title}}
+              hr.seperator
               p {{idea.description}}
+            .col-sm-1
+              a.btn.btn-join(href="/join-idea" tooltip="join the team")

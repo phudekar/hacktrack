@@ -22,7 +22,6 @@ div.navbar.navbar-default.navbar-static-top(ng-controller='NavbarCtrl')
 
         li(ng-hide='isLoggedIn()', ng-class='{active: isActive("/login")}')
           a.btn.btn-google-plus(href='/auth/google')
-            i.fa.fa-google-plus
             |  Login with Google+
 
         li(ng-show='isLoggedIn()')
