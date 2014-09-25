@@ -5,6 +5,7 @@ angular.module('hacktrackApp')
     $routeProvider
       .when('/submit-idea', {
         templateUrl: 'app/idea/submit-idea.html',
-        controller: 'IdeaCtrl'
+        controller: 'IdeaCtrl',
+        authenticate: true
       })
   });

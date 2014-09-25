@@ -7,19 +7,19 @@ angular.module('hacktrackApp', [
   'ngRoute',
   'btford.socket-io',
   'ui.bootstrap'
-])
-  .config(function ($routeProvider, $locationProvider, $httpProvider) {
-    $routeProvider
-      .otherwise({
-        redirectTo: '/'
-      });
+  ])
+.config(function ($routeProvider, $locationProvider, $httpProvider) {
+  $routeProvider
+  .otherwise({
+    redirectTo: '/'
+  });
 
-    $locationProvider.html5Mode(true);
-    $httpProvider.interceptors.push('authInterceptor');
-  })
+  $locationProvider.html5Mode(true);
+  $httpProvider.interceptors.push('authInterceptor');
+})
 
-  .factory('authInterceptor', function ($rootScope, $q, $cookieStore, $location) {
-    return {
+.factory('authInterceptor', function ($rootScope, $q, $cookieStore, $location,$window) {
+  return {
       // Add authorization token to headers
       request: function (config) {
         config.headers = config.headers || {};
@@ -32,7 +32,7 @@ angular.module('hacktrackApp', [
       // Intercept 401s and redirect you to login
       responseError: function(response) {
         if(response.status === 401) {
-          $location.path('/login');
+          $window.location.href ='/auth/google';
           // remove any stale tokens
           $cookieStore.remove('token');
           return $q.reject(response);
@@ -44,13 +44,16 @@ angular.module('hacktrackApp', [
     };
   })
 
-  .run(function ($rootScope, $location, Auth) {
+.run(function ($rootScope, $location, Auth,$window,$route) {
     // Redirect to login if route requires auth and you're not logged in
-    $rootScope.$on('$routeChangeStart', function (event, next) {
-      Auth.isLoggedInAsync(function(loggedIn) {
-        if (next.authenticate && !loggedIn) {
-          $location.path('/login');
-        }
-      });
-    });
+    $rootScope.$on('$locationChangeStart', function (event, next) {
+
+     var nextPath = $location.path();
+     var nextRoute = $route.routes[nextPath]
+
+     if (nextRoute.authenticate &&!Auth.isLoggedIn()) {
+      event.preventDefault();
+      $window.location.href ='/auth/google';
+    }
   });
+});
