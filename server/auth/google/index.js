@@ -2,23 +2,37 @@
 
 var express = require('express');
 var passport = require('passport');
+
 var auth = require('../auth.service');
 
 var router = express.Router();
 
-router
-  .get('/', passport.authenticate('google', {
-    failureRedirect: '/signup',
-    scope: [
-      'https://www.googleapis.com/auth/userinfo.profile',
-      'https://www.googleapis.com/auth/userinfo.email'
-    ],
-    session: false
-  }))
+var sendAuthenticationRequest = function(req,res,next){
+ req.session.redirectUrl = "/";
+  if(req.query.success_url){
+    req.session.redirectUrl = req.query.success_url;
+ }
 
-  .get('/callback', passport.authenticate('google', {
+ passport.authenticate('google', {
+  failureRedirect: '/signup',
+  scope: [
+  'https://www.googleapis.com/auth/userinfo.profile',
+  'https://www.googleapis.com/auth/userinfo.email'
+  ],
+  session: false
+})(req,res,next);
+}
+
+var handleCallback = function(req,res,next){
+  console.log("Handling callback");
+  passport.authenticate('google', {
     failureRedirect: '/signup',
     session: false
-  }), auth.setTokenCookie);
+  })(req,res,next);
+}
+
+router
+.get('/', sendAuthenticationRequest)
+.get('/callback', handleCallback, auth.setTokenCookie);
 
 module.exports = router;

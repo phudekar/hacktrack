@@ -115,7 +115,8 @@ angular.module('hacktrackApp')
        */
       isLoggedInAsync: function(cb) {
         if(currentUser.hasOwnProperty('$promise')) {
-          currentUser.$promise.then(function() {
+          currentUser.$promise.then(function(data) {
+            
             cb(true);
           }).catch(function() {
             cb(false);

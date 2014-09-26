@@ -44,16 +44,17 @@ angular.module('hacktrackApp', [
     };
   })
 
-.run(function ($rootScope, $location, Auth,$window,$route) {
+.run(function ($rootScope, $location, Auth,$window,$route, $q) {
     // Redirect to login if route requires auth and you're not logged in
-    $rootScope.$on('$locationChangeStart', function (event, next) {
-
-     var nextPath = $location.path();
-     var nextRoute = $route.routes[nextPath]
-
-     if (nextRoute.authenticate &&!Auth.isLoggedIn()) {
-      event.preventDefault();
-      $window.location.href ='/auth/google';
-    }
+    $rootScope.$on('$routeChangeError', function (event, current, previous, reason) {
+      var redirectTo = "/";
+      if(current) 
+        {
+          redirectTo = current.$$route.originalPath;
+        }
+        
+      if(reason && !reason.authenticated){
+        $window.location.href = '/auth/google?success_url=' + redirectTo;
+     }
+   })
   });
-});

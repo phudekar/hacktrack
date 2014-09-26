@@ -1,7 +1,8 @@
 'use strict';
 
 angular.module('hacktrackApp')
-.controller('IdeaCtrl', function ($scope, Auth, $http, $location, $window,socket) {
+.controller('IdeaCtrl', function ($scope, Auth, $http, $location, $window,socket,isAuthenticated) {
+  $scope.isAuthenticated = isAuthenticated;
   $scope.ideas = [];
   $scope.errors = {};
   $scope.newIdea={};
