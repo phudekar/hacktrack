@@ -1,16 +1,17 @@
 /**
  * Using Rails-like standard naming convention for endpoints.
  * GET     /ideas              ->  index
+ * GET     /ideas/myidea       ->  myidea
  * POST    /ideas              ->  create
  * GET     /ideas/:id          ->  show
  * PUT     /ideas/:id          ->  update
  * DELETE  /ideas/:id          ->  destroy
  */
 
-'use strict';
+ 'use strict';
 
-var _ = require('lodash');
-var Idea = require('./idea.model');
+ var _ = require('lodash');
+ var Idea = require('./idea.model');
 
 // Get list of ideas
 exports.index = function(req, res) {
@@ -60,6 +61,33 @@ exports.destroy = function(req, res) {
       if(err) { return handleError(res, err); }
       return res.send(204);
     });
+  });
+};
+
+exports.myideas = function(req, res) {
+ Idea.find({ 'originator.email' : req.user.email },function (err, ideas) {
+  if(err) { return handleError(res, err); }
+  return res.json(200, ideas);
+});
+};
+
+exports.like = function(req, res) {
+  Idea.findById(req.params.id, function (err, idea) {
+    if(err) { return handleError(res, err); }
+    if(!idea) { return res.send(404); }
+    var user = {email: req.user.email, name: req.user.name};
+    var likedBy=idea.liked_by.map(function(like){
+      return like.email;
+    });
+    if(likedBy.indexOf(user.email)<0){
+      idea.liked_by.push(user);
+      idea.save(function (err) {
+        if (err) { return handleError(res, err); }
+        return res.json(200, idea);
+      });
+    }else{
+       return res.send(304);
+    } 
   });
 };
 

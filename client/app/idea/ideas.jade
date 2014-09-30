@@ -1,0 +1,19 @@
+div(ng-include='"components/navbar/navbar.html"')
+.container
+  .row
+    div.text-center
+      img.bulb.inline(src='/assets/images/bulb.png')
+      h3 Join existing idea or create new
+
+    div(ng-include='"app/idea/submit.html"')
+
+    div.col-sm-12
+      ul.nav
+        li.inline(ng-repeat="idea in ideas")
+          div.col-sm-12.idea-container.clear-both
+            .col-sm-11
+              h4 {{idea.title}}
+              hr.seperator
+              p {{idea.description}}
+            .col-sm-1
+              a.btn.btn-round.btn-join(ng-click="likeIdea(idea)" tooltip="like this")

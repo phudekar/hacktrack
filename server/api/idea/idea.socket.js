@@ -16,9 +16,9 @@ exports.register = function(socket) {
 }
 
 function onSave(socket, doc, cb) {
-  socket.emit('idea:save', doc);
+  socket.emit('ideas:save', doc);
 }
 
 function onRemove(socket, doc, cb) {
-  socket.emit('idea:remove', doc);
+  socket.emit('ideas:remove', doc);
 }

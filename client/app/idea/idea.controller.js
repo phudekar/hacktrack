@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('hacktrackApp')
-.controller('IdeaCtrl', function ($scope, Auth, $http, $location, $window,socket,isAuthenticated) {
-  $scope.isAuthenticated = isAuthenticated;
+.controller('IdeaCtrl', function ($scope, Auth, $http, $location, $window,socket) {
+  $scope.isAuthenticated = Auth.isAuthenticated;
   $scope.ideas = [];
   $scope.errors = {};
   $scope.newIdea={};
@@ -15,22 +15,30 @@ angular.module('hacktrackApp')
         title: $scope.newIdea.title,
         description: $scope.newIdea.description,
         originator: { name: Auth.getCurrentUser().name, email: Auth.getCurrentUser().email}
+      }).success(function(){
+        $scope.submitted = false;
+        $scope.newIdea={};
+        $scope.ideaCreated();
       });
-      $scope.submitted = false;
-      $scope.newIdea={};
     }
   };
 
-  $scope.deleteThing = function(idea) {
-    $http.delete('/api/ideas/' + idea._id);
+  $scope.ideaCreated = function(){
+    // nothing to do here
+  }
+
+  $scope.likeIdea = function(idea){
+    $http.post('/api/ideas/like/'+idea._id).success(function(){
+      
+    });
   };
 
   $scope.$on('$destroy', function () {
-    socket.unsyncUpdates('idea');
+    socket.unsyncUpdates('ideas');
   });
 
   $http.get('/api/ideas').success(function(ideas) {
     $scope.ideas = ideas;
-    socket.syncUpdates('idea', $scope.ideas);
+    socket.syncUpdates('ideas', $scope.ideas);
   });
 });

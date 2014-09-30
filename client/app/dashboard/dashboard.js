@@ -3,8 +3,8 @@
 angular.module('hacktrackApp')
 .config(function ($routeProvider) {
 	$routeProvider
-	.when('/idea', {
-		templateUrl: 'app/idea/ideas.html',
-		controller: 'IdeaCtrl'
+	.when('/dashboard', {
+		templateUrl: 'app/dashboard/dashboard.html',
+		controller: 'DashboardCtrl'
 	})
 });

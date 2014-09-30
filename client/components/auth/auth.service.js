@@ -142,6 +142,26 @@ angular.module('hacktrackApp')
        */
       getToken: function() {
         return $cookieStore.get('token');
+      },
+
+      isAuthenticated: function() {
+        console.log('trying to resolve');
+        var deferred = $q.defer();
+
+        if(currentUser.hasOwnProperty('$promise')) {
+          currentUser.$promise.then(function(data) {
+            deferred.resolve({authenticated:true});
+
+          }).catch(function() {
+            deferred.reject({authenticated:false});
+          });
+        } else if(currentUser.hasOwnProperty('role')) {
+          deferred.resolve({authenticated:true});
+        } else {
+          deferred.reject({authenticated:false});
+        }
+
+        return deferred.promise;
       }
     };
   });

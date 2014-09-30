@@ -4,7 +4,11 @@ angular.module('hacktrackApp')
   .controller('NavbarCtrl', function ($scope, $location, Auth, $window) {
     $scope.menu = [{
       'title': 'Home',
-      'link': '/'
+      'link': '/idea'
+    },
+    {
+      'title': 'Dashboard',
+      'link': '/dashboard'
     }];
 
     $scope.isCollapsed = true;
