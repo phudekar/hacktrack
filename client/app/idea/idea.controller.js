@@ -11,7 +11,7 @@ angular.module('hacktrackApp')
 
   $scope.likeIdea = function(idea){
     $http.post('/api/ideas/like/'+idea._id).success(function(){
-      
+
     });
   };
 
@@ -21,6 +21,20 @@ angular.module('hacktrackApp')
 
   $http.get('/api/ideas').success(function(ideas) {
     $scope.ideas = ideas;
-    socket.syncUpdates('ideas', $scope.ideas);
+    var updateImage = function(idea){
+     return function(data){
+      idea.originator.image = data.image;
+      idea.originator.link = data.link;
+    }
+  }
+  for (var i in ideas) {
+    var idea = ideas[i]
+    $http.get('/api/users/image/' +  $scope.ideas[i].originator.email)
+    .success(updateImage(idea));
+  };
+  socket.syncUpdates('ideas', $scope.ideas,function(event,idea){
+    $http.get('/api/users/image/' +  idea.originator.email)
+    .success(updateImage(idea));
   });
+});
 });

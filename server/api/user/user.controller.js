@@ -20,6 +20,16 @@ exports.index = function(req, res) {
   });
 };
 
+exports.image = function(req, res) {
+  var email = req.params.email;
+
+  User.findOne({email: email}, function (err, user) {
+    if (err) return next(err);
+    if (!user) return res.send(404);
+    res.json({ image: user.google.picture, link: user.google.link});
+  });
+};
+
 /**
  * Creates a new user
  */

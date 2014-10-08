@@ -21,6 +21,8 @@ div(ng-include='"components/navbar/navbar.html"')
                 p {{idea.description}}
               div.col-md-2.col-sm-12
                 a.btn.btn-round.btn-join(ng-click="likeIdea(idea)" tooltip="like this")
+                a.originator(ng-href="{{idea.originator.link}}")
+                  img.btn-round(ng-src='{{idea.originator.image}}')
 
 
   script(src="/assets/js/flipclock.min.js")
