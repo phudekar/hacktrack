@@ -3,15 +3,17 @@ div(ng-include='"components/navbar/navbar.html"')
   .row
     div.text-center
       h3 Cheers, here are your ideas!
+
     div.col-sm-12
       ul.nav
-        li.inline(ng-repeat="idea in myideas")
-          div.col-sm-12.idea-container.clear-both
-            .col-sm-11
-              h4 {{idea.title}}
-              hr.seperator
-              p {{idea.description}}
-            .col-sm-1
+        li(ng-repeat="idea in myideas")
+          div.col-md-12.col-sm-12.clear-both
+            div.col-sm-12.idea-container
+              div.col-md-10.col-sm-12
+                h4 {{idea.title}}
+                hr.seperator
+                p {{idea.description}}
+              div.col-md-2.col-sm-12
               a.btn.btn-round.btn-delete(ng-click="deleteIdea(idea)",tooltip="delete this idea")
 
     div(ng-include='"app/idea/submit.html"')

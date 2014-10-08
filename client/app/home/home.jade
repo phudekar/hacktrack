@@ -1,0 +1,20 @@
+div(ng-include='"components/navbar/navbar.html"')
+
+div.container
+	link(rel="stylesheet" href="/assets/css/flipclock.css")
+	div.row
+		.col-sm-12
+		.text-center
+			div#countdown
+
+	div.row
+		div.col-sm-12.text-center
+			div.col-sm-4
+				div.view-icon.idea-view
+			div.col-sm-4
+				div.view-icon.teams-view
+			div.col-sm-4
+				div.view-icon.progress-view
+
+	script(src="/assets/js/flipclock.min.js")
+	script(src="/assets/js/clock.js")

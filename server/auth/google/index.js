@@ -10,7 +10,7 @@ var router = express.Router();
 var sendAuthenticationRequest = function(req,res,next){
  req.session.redirectUrl = "/";
   if(req.query.success_url){
-    req.session.redirectUrl = req.query.success_url;
+    req.session.redirectUrl = req.query.success_url ;
  }
 
  passport.authenticate('google', {

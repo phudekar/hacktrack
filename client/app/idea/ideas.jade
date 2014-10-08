@@ -1,5 +1,8 @@
 div(ng-include='"components/navbar/navbar.html"')
 .container
+  link(rel="stylesheet" href="/assets/css/flipclock.css")
+  div.row.col-sm-12.text-center
+      div#countdown
   .row
     div.text-center
       img.bulb.inline(src='/assets/images/bulb.png')
@@ -10,10 +13,15 @@ div(ng-include='"components/navbar/navbar.html"')
     div.col-sm-12
       ul.nav
         li.inline(ng-repeat="idea in ideas")
-          div.col-sm-12.idea-container.clear-both
-            .col-sm-11
-              h4 {{idea.title}}
-              hr.seperator
-              p {{idea.description}}
-            .col-sm-1
-              a.btn.btn-round.btn-join(ng-click="likeIdea(idea)" tooltip="like this")
+          div.col-md-4.col-sm-12.clear-both
+            div.col-sm-12.idea-container
+              div.col-md-10.col-sm-12
+                h4 {{idea.title}}
+                hr.seperator
+                p {{idea.description}}
+              div.col-md-2.col-sm-12
+                a.btn.btn-round.btn-join(ng-click="likeIdea(idea)" tooltip="like this")
+
+
+  script(src="/assets/js/flipclock.min.js")
+  script(src="/assets/js/clock.js")
