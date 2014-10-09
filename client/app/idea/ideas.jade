@@ -4,9 +4,9 @@ div(ng-include='"components/navbar/navbar.html"')
   div.row.col-sm-12.text-center
       div#countdown
   .row
-    div.text-center
-      img.bulb.inline(src='/assets/images/bulb.png')
-      h3 Join existing idea or create new
+    //- div.text-center
+    //-   img.bulb.inline(src='/assets/images/bulb.png')
+    //-   h3  existing idea or create new
 
     div(ng-include='"app/idea/submit.html"')
 
@@ -19,8 +19,9 @@ div(ng-include='"components/navbar/navbar.html"')
                 h4 {{idea.title}}
                 hr.seperator
                 p {{idea.description}}
-              div.col-md-2.col-sm-12
+              div.col-md-2.col-sm-12.idea-actions
                 a.btn.btn-round.btn-join(ng-click="likeIdea(idea)" tooltip="like this")
+                  span(ng-show="idea.liked_by.length>0") {{idea.liked_by.length}}
                 a.originator(ng-href="{{idea.originator.link}}")
                   img.btn-round(ng-src='{{idea.originator.image}}')
 

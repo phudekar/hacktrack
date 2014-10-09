@@ -14,6 +14,9 @@ div(ng-include='"components/navbar/navbar.html"')
                 hr.seperator
                 p {{idea.description}}
               div.col-md-2.col-sm-12
-              a.btn.btn-round.btn-delete(ng-click="deleteIdea(idea)",tooltip="delete this idea")
+                span.btn.btn-disabled.btn-round.btn-join(tooltip="total likes")
+                  span {{idea.liked_by.length}}
+                a.btn.btn-round.btn-delete(ng-click="deleteIdea(idea)",tooltip="delete this idea")
+                
 
     div(ng-include='"app/idea/submit.html"')

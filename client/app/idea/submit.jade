@@ -10,9 +10,9 @@ div.col-md-12(ng-controller='SubmitIdeaCtrl')
     div.col-sm-12.clear-both
       div.form-container.col-sm-12
         div.col-md-11.col-sm-12
-          input.col-sm-12.idea-title.form-control(type='text', name='title', ng-model='newIdea.title', placeholder='Whats on your mind?' required)
+          input.col-sm-12.idea-title.form-control(type='text', name='title', ng-model='newIdea.title', placeholder='What would you like to create?' required)
           hr.seperator
-          input.idea-description.form-control(type='text', name='description', ng-model='newIdea.description', placeholder='Would you like to describe it?' required)
+          input.idea-description.form-control(type='text', name='description', ng-model='newIdea.description', placeholder='Please describe it for others.' required)
         
         div.col-md-1.col-sm-12
           button.btn.btn-inverse.btn-lg.btn-round.btn-submit(type='submit' tooltip="create new")
