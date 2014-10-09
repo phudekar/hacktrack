@@ -1,9 +1,10 @@
 'use strict';
 
 angular.module('hacktrackApp')
-.controller('IdeaCtrl', function ($scope, Auth, $http, $location, $window,socket) {
+.controller('IdeaCtrl', function ($scope, Auth, $http, $location, $window,socket, Clock) {
   $scope.isAuthenticated = Auth.isAuthenticated;
   $scope.ideas = [];
+  Clock.showClock();
 
   $scope.ideaCreated = function(){
     // nothing to do here
@@ -32,6 +33,7 @@ angular.module('hacktrackApp')
     $http.get('/api/users/image/' +  $scope.ideas[i].originator.email)
     .success(updateImage(idea));
   };
+  
   socket.syncUpdates('ideas', $scope.ideas,function(event,idea){
     $http.get('/api/users/image/' +  idea.originator.email)
     .success(updateImage(idea));

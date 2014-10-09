@@ -1,6 +1,6 @@
 div(ng-include='"components/navbar/navbar.html"')
 .container
-  link(rel="stylesheet" href="/assets/css/flipclock.css")
+  //- link(rel="stylesheet" href="/assets/css/flipclock.css")
   div.row.col-sm-12.text-center
       div#countdown
   .row
@@ -22,9 +22,9 @@ div(ng-include='"components/navbar/navbar.html"')
               div.col-md-2.col-sm-12.idea-actions
                 a.btn.btn-round.btn-join(ng-click="likeIdea(idea)" tooltip="like this")
                   span(ng-show="idea.liked_by.length>0") {{idea.liked_by.length}}
-                a.originator(ng-href="{{idea.originator.link}}")
+                a.originator(ng-href="{{idea.originator.link}}" tooltip="{{idea.originator.name}}")
                   img.btn-round(ng-src='{{idea.originator.image}}')
 
 
-  script(src="/assets/js/flipclock.min.js")
-  script(src="/assets/js/clock.js")
+  //- script(src="/assets/js/flipclock.min.js")
+  //- script(src="/assets/js/clock.js")
