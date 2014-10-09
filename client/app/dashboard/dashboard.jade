@@ -8,12 +8,18 @@ div(ng-include='"components/navbar/navbar.html"')
       ul.nav
         li(ng-repeat="idea in myideas")
           div.col-md-12.col-sm-12.clear-both
-            div.col-sm-12.idea-container
-              div.col-md-10.col-sm-12
-                h4 {{idea.title}}
-                hr.seperator
-                p {{idea.description}}
-              div.col-md-2.col-sm-12.text-right
+            div.col-sm-12.idea-dashboard-container
+              div.col-md-9.col-sm-12
+                h4
+                  p(ng-hide="isEditing(idea._id)") {{idea.title}}
+                  input.col-sm-12.idea-title.form-control(type='text', name='title', ng-model='editedIdeas[idea._id].title' ng-show="isEditing(idea._id)")
+                hr.col-sm-12.seperator
+                p(ng-hide="isEditing(idea._id)") {{idea.description}}
+                textarea.idea-description.form-control(name='description', ng-model='editedIdeas[idea._id].description' ng-show="isEditing(idea._id)")
+
+              div.col-md-3.col-sm-12.text-right
+                a.btn.btn-round.btn-edit(ng-click="editIdea(idea)",tooltip="edit this idea" ng-hide="isEditing(idea._id)")
+                a.btn.btn-round.btn-done(ng-click="updateIdea(idea._id)",tooltip="update this idea" ng-show="isEditing(idea._id)")
                 span.btn.btn-disabled.btn-round.btn-join(tooltip="total likes")
                   span {{idea.liked_by.length}}
                 a.btn.btn-round.btn-delete(ng-click="deleteIdea(idea)",tooltip="delete this idea")

@@ -5,6 +5,7 @@ angular.module('hacktrackApp')
 	$scope.isAuthenticated = Auth.isAuthenticated;
 	$scope.myideas = [];
 	$scope.errors = {};
+	$scope.editedIdeas = [];
 
 	$scope.deleteIdea = function(idea) {
 		$http.delete('/api/ideas/' + idea._id).success(function() {
@@ -13,15 +14,33 @@ angular.module('hacktrackApp')
 		});
 	}
 
+	$scope.isEditing = function(id){
+		return $scope.editedIdeas[id] != undefined;
+	}
+
+	$scope.editIdea = function(idea) {
+		$scope.editedIdeas[idea._id] = idea;
+	}
+
+	$scope.updateIdea = function(id) {
+		var idea = $scope.editedIdeas[id];
+		$scope.editedIdeas[id] = undefined;
+
+		$http.put('/api/ideas/' + id, idea).success(function(){
+			$scope.editedIdeas[id] = undefined;
+			loadMyIdeas();
+		});
+	}
+
 	$scope.ideaCreated = function(){
 		loadMyIdeas();
 	}
 
-  	$scope.$on('$destroy', function () {
-    	socket.unsyncUpdates('myideas');
-  	});
+	$scope.$on('$destroy', function () {
+		socket.unsyncUpdates('myideas');
+	});
 
-  	function loadMyIdeas(){
+	function loadMyIdeas(){
 		$http.get('/api/ideas/myideas').success(function(ideas) {
 			$scope.myideas = ideas;
 		});

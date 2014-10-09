@@ -1,7 +1,30 @@
+.idea-dashboard-container{
+	border: 1px solid lightgray;
+    -webkit-transition: margin-top 2s, border .5s, height 2s; /* For Safari 3.1 to 6.0 */
+    transition: margin-top 2s,  border .5s, height 2s;
+    margin: 10px 5px;
+}
+
+.btn-delete, .btn-edit, .btn-done{
+	background-position-x: 3px;
+}
 .btn-delete{
 	background-image: url('/assets/images/trash.png');
-	background-size: 48px 48px;
-	background-position-x: 3px;
+	background-size: 42px 42px !important;
+}
+
+.btn-done{
+	background-image: url('/assets/images/done.png');
+}
+
+.btn-edit{
+	background-image: url('/assets/images/edit.png');
+}
+
+.btn-edit, .btn-done{
+	background-size: 52px 52px !important;
+	width: 52px !important;
+	height: 52px !important;
 }
 
 .btn-disabled{
